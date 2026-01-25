@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projects } from "../assets/assets/constants";
+import type { Project } from "../assets/assets/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,10 +61,10 @@ const Projects = () => {
           Projects
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {projects.map((project: Project, index: number) => (
             <div
               key={index}
-              ref={(el) => (cardsRef.current[index] = el)}
+              ref={(el) => { cardsRef.current[index] = el; }}
               className="card-border rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 group"
             >
               <div className="relative h-48 overflow-hidden">
@@ -79,7 +80,7 @@ const Projects = () => {
                 <p className="text-sm text-gray-500 mb-3">{project.tech}</p>
                 <p className="text-gray-600 mb-4">{project.description}</p>
                 <ul className="space-y-2 mb-4">
-                  {project.features.slice(0, 2).map((feature, idx) => (
+                  {project.features.slice(0, 2).map((feature: string, idx: number) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
                       <span className="text-purple-600 mt-1">•</span>
                       <span>{feature}</span>

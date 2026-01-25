@@ -95,7 +95,7 @@ const Hero = () => {
                     className="hero-badge"
                   >
                     <div
-                      ref={(el) => (counterRefs.current[index] = el)}
+                      ref={(el) => { counterRefs.current[index] = el; }}
                       className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600"
                     >
                       {item.value}

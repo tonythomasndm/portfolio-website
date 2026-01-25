@@ -4,11 +4,12 @@ import { OrbitControls, useGLTF, Environment } from "@react-three/drei";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { techStackIcons } from "../assets/assets/constants";
+import type { TechStackIcon } from "../assets/assets/constants";
 import { Group } from "three";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TechIcon = ({ modelPath, scale, rotation, name }: { modelPath: string; scale: number; rotation: number[]; name: string }) => {
+const TechIcon = ({ modelPath, scale, rotation }: { modelPath: string; scale: number; rotation: [number, number, number] }) => {
   const { scene } = useGLTF(modelPath);
   const meshRef = useRef<Group>(null);
 
@@ -94,10 +95,10 @@ const Skills = () => {
           Skills
         </h2>
         <div className="tech-grid mb-16">
-          {techStackIcons.map((tech, index) => (
+          {techStackIcons.map((tech: TechStackIcon, index: number) => (
             <div
               key={index}
-              ref={(el) => (cardsRef.current[index] = el)}
+              ref={(el) => { cardsRef.current[index] = el; }}
               className="tech-icon-wrapper card-border rounded-xl p-4 hover:shadow-xl transition-all duration-300"
             >
               <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
@@ -107,7 +108,6 @@ const Skills = () => {
                   modelPath={tech.modelPath}
                   scale={tech.scale}
                   rotation={tech.rotation}
-                  name={tech.name}
                 />
                 <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1} />
                 <Environment preset="sunset" />

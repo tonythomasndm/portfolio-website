@@ -67,7 +67,7 @@ const Experience = () => {
             {expCards.map((exp, index) => (
               <div
                 key={index}
-                ref={(el) => (cardsRef.current[index] = el)}
+                ref={(el) => { cardsRef.current[index] = el; }}
                 className="exp-card-wrapper relative"
               >
                 <div className="timeline-logo absolute xl:left-[-35.5vw] md:left-[-60px] left-[-40px]">

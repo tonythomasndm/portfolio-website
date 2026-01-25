@@ -74,7 +74,7 @@ const About = () => {
               {education.map((edu, index) => (
                 <div
                   key={index}
-                  ref={(el) => (cardsRef.current[index] = el)}
+                  ref={(el) => { cardsRef.current[index] = el; }}
                   className="card-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300"
                 >
                   <h4 className="text-xl font-semibold mb-2">{edu.institution}</h4>

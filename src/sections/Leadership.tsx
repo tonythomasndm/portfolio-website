@@ -68,7 +68,7 @@ const Leadership = () => {
               {leadership.map((item, index) => (
                 <div
                   key={index}
-                  ref={(el) => (itemsRef.current[index] = el)}
+                  ref={(el) => { itemsRef.current[index] = el; }}
                   className="card-border rounded-xl p-6 hover:shadow-lg transition-all duration-300"
                 >
                   <p className="text-gray-700 leading-relaxed">{item}</p>
@@ -84,7 +84,7 @@ const Leadership = () => {
               {awards.map((award, index) => (
                 <div
                   key={index}
-                  ref={(el) => (itemsRef.current[leadership.length + index] = el)}
+                  ref={(el) => { itemsRef.current[leadership.length + index] = el; }}
                   className="card-border rounded-xl p-6 hover:shadow-lg transition-all duration-300"
                 >
                   <div className="flex items-start gap-3">

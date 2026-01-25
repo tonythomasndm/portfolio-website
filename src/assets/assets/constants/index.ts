@@ -1,4 +1,81 @@
-const navLinks = [
+export interface NavLink {
+  name: string;
+  link: string;
+}
+
+export interface Word {
+  text: string;
+  imgPath: string;
+}
+
+export interface CounterItem {
+  value: number;
+  suffix: string;
+  label: string;
+}
+
+export interface LogoIcon {
+  imgPath: string;
+}
+
+export interface Ability {
+  imgPath: string;
+  title: string;
+  desc: string;
+}
+
+export interface TechStackImg {
+  name: string;
+  imgPath: string;
+}
+
+export interface TechStackIcon {
+  name: string;
+  modelPath: string;
+  scale: number;
+  rotation: [number, number, number];
+}
+
+export interface ExpCard {
+  company: string;
+  location: string;
+  imgPath: string;
+  logoPath: string;
+  title: string;
+  date: string;
+  certificate: string;
+  responsibilities: string[];
+}
+
+export interface ExpLogo {
+  name: string;
+  imgPath: string;
+}
+
+export interface Project {
+  title: string;
+  tech: string;
+  github?: string;
+  website?: string;
+  description: string;
+  features: string[];
+  imgPath: string;
+}
+
+export interface Education {
+  institution: string;
+  degree: string;
+  period: string;
+  grade: string;
+}
+
+export interface SocialLink {
+  name: string;
+  imgPath: string;
+  url: string;
+}
+
+export const navLinks: NavLink[] = [
   {
     name: "About",
     link: "#about",
@@ -21,7 +98,7 @@ const navLinks = [
   },
 ];
 
-const words = [
+export const words: Word[] = [
   { text: "Developer", imgPath: "/images/code.svg" },
   { text: "Designer", imgPath: "/images/designs.svg" },
   { text: "Engineer", imgPath: "/images/concepts.svg" },
@@ -32,14 +109,14 @@ const words = [
   { text: "Creator", imgPath: "/images/ideas.svg" },
 ];
 
-const counterItems = [
+export const counterItems: CounterItem[] = [
   { value: 200, suffix: "+", label: "Leetcode Problems" },
   { value: 200, suffix: "+", label: "GeeksForGeeks Problems" },
   { value: 5, suffix: "+", label: "Projects" },
   { value: 8.18, suffix: "", label: "CGPA" },
 ];
 
-const logoIconsList = [
+export const logoIconsList: LogoIcon[] = [
   {
     imgPath: "/images/logos/company-logo-1.png",
   },
@@ -75,7 +152,7 @@ const logoIconsList = [
   },
 ];
 
-const abilities = [
+export const abilities: Ability[] = [
   {
     imgPath: "/images/seo.png",
     title: "Quality Focus",
@@ -93,7 +170,7 @@ const abilities = [
   },
 ];
 
-const techStackImgs = [
+export const techStackImgs: TechStackImg[] = [
   {
     name: "React Developer",
     imgPath: "/images/logos/react.png",
@@ -116,7 +193,7 @@ const techStackImgs = [
   },
 ];
 
-const techStackIcons = [
+export const techStackIcons: TechStackIcon[] = [
   {
     name: "React Developer",
     modelPath: "/models/react_logo-transformed.glb",
@@ -149,7 +226,7 @@ const techStackIcons = [
   },
 ];
 
-const expCards = [
+export const expCards: ExpCard[] = [
   {
     company: "Infraprime Logistics Technologies Pvt. Ltd",
     location: "Gurugram",
@@ -180,7 +257,7 @@ const expCards = [
   },
 ];
 
-const expLogos = [
+export const expLogos: ExpLogo[] = [
   {
     name: "logo1",
     imgPath: "/images/logo1.png",
@@ -191,7 +268,7 @@ const expLogos = [
   },
 ];
 
-const projects = [
+export const projects: Project[] = [
   {
     title: "LLM based Policy Assessment Chatbot",
     tech: "Python, Django, Langchain, Llama 3, Google GoEmotions",
@@ -252,7 +329,7 @@ const projects = [
   },
 ];
 
-const education = [
+export const education: Education[] = [
   {
     institution: "Indraprastha Institute of Information Technology, Delhi",
     degree: "B.Tech in Computer Science and Design",
@@ -273,19 +350,19 @@ const education = [
   },
 ];
 
-const leadership = [
+export const leadership: string[] = [
   "Lead Organizer of various college events like RIISE, Esummit'23, Epoch'24 hackathon and Anveshan hackathon",
   "Coordinated the design and events team at Fresources, CyFuse Club, and IEEE-IIITD branch",
   "Led educational workshops and volunteered for more than 100 underprivileged children at Vikiran Delhi",
 ];
 
-const awards = [
+export const awards: string[] = [
   "Competitive Programming: 200+ Leetcode solves, 200+ GeeksForGeeks solves, and Pupil rating on Codeforces",
   "Awarded Best Teaching Assistant in Human-Centered Design Course under Professor Rajiv Ratn Shah",
   "Received Honorarium Award for conducting Prototyping with Figma Session in Design Summer School'24 at IIITD",
 ];
 
-const socialLinks = [
+export const socialLinks: SocialLink[] = [
   {
     name: "github",
     imgPath: "/images/logos/git.svg",
@@ -302,20 +379,3 @@ const socialLinks = [
     url: "mailto:tony21360@iiitd.ac.in",
   },
 ];
-
-export {
-  words,
-  abilities,
-  logoIconsList,
-  counterItems,
-  expCards,
-  expLogos,
-  projects,
-  education,
-  leadership,
-  awards,
-  socialLinks,
-  techStackIcons,
-  techStackImgs,
-  navLinks,
-};
