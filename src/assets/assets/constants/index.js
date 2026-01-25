@@ -1,38 +1,42 @@
 const navLinks = [
   {
-    name: "Work",
-    link: "#work",
+    name: "About",
+    link: "#about",
   },
   {
     name: "Experience",
     link: "#experience",
   },
   {
+    name: "Projects",
+    link: "#projects",
+  },
+  {
     name: "Skills",
     link: "#skills",
   },
   {
-    name: "Testimonials",
-    link: "#testimonials",
+    name: "Contact",
+    link: "#contact",
   },
 ];
 
 const words = [
-  { text: "Ideas", imgPath: "/images/ideas.svg" },
-  { text: "Concepts", imgPath: "/images/concepts.svg" },
-  { text: "Designs", imgPath: "/images/designs.svg" },
-  { text: "Code", imgPath: "/images/code.svg" },
-  { text: "Ideas", imgPath: "/images/ideas.svg" },
-  { text: "Concepts", imgPath: "/images/concepts.svg" },
-  { text: "Designs", imgPath: "/images/designs.svg" },
-  { text: "Code", imgPath: "/images/code.svg" },
+  { text: "Developer", imgPath: "/images/code.svg" },
+  { text: "Designer", imgPath: "/images/designs.svg" },
+  { text: "Engineer", imgPath: "/images/concepts.svg" },
+  { text: "Creator", imgPath: "/images/ideas.svg" },
+  { text: "Developer", imgPath: "/images/code.svg" },
+  { text: "Designer", imgPath: "/images/designs.svg" },
+  { text: "Engineer", imgPath: "/images/concepts.svg" },
+  { text: "Creator", imgPath: "/images/ideas.svg" },
 ];
 
 const counterItems = [
-  { value: 15, suffix: "+", label: "Years of Experience" },
-  { value: 200, suffix: "+", label: "Satisfied Clients" },
-  { value: 108, suffix: "+", label: "Completed Projects" },
-  { value: 90, suffix: "%", label: "Client Retention Rate" },
+  { value: 200, suffix: "+", label: "Leetcode Problems" },
+  { value: 200, suffix: "+", label: "GeeksForGeeks Problems" },
+  { value: 5, suffix: "+", label: "Projects" },
+  { value: 8.18, suffix: "", label: "CGPA" },
 ];
 
 const logoIconsList = [
@@ -147,39 +151,31 @@ const techStackIcons = [
 
 const expCards = [
   {
-    review: "Adrian brought creativity and technical expertise to the team, significantly improving our frontend performance. His work has been invaluable in delivering faster experiences.",
+    company: "Infraprime Logistics Technologies Pvt. Ltd",
+    location: "Gurugram",
     imgPath: "/images/exp1.png",
     logoPath: "/images/logo1.png",
-    title: "Frontend Developer",
-    date: "January 2023 - Present",
+    title: "Software Intern",
+    date: "May 2024 - July 2024",
+    certificate: "https://drive.google.com/file/d/1VjIptsR3b8vbVjVTiUCDw1-8_t-r1QIE/view?usp=drive_link",
     responsibilities: [
-      "Developed and maintained user-facing features for the Hostinger website.",
-      "Collaborated closely with UI/UX designers to ensure seamless user experiences.",
-      "Optimized web applications for maximum speed and scalability.",
+      "Built a GPS tracking and fraud detection system using Mappls and Raspberry Pi, boosting route optimization by 40%",
+      "Developed an edge computing tool with Python and TensorFlow to detect unsafe driving and send real-time alerts",
+      "Created a cloud-sync system with SQLite and InfluxDB, and Kafka for sensor data streaming and real-time analysis",
     ],
   },
   {
-    review: "Adrian’s contributions to Docker's web applications have been outstanding. He approaches challenges with a problem-solving mindset.",
+    company: "Applied Data Science and AI Lab",
+    location: "IIIT Delhi",
     imgPath: "/images/exp2.png",
     logoPath: "/images/logo2.png",
     title: "Full Stack Developer",
-    date: "June 2020 - December 2023",
+    date: "August 2023 - May 2024",
+    certificate: "https://drive.google.com/file/d/1VjIptsR3b8vbVjVTiUCDw1-8_t-r1QIE/view?usp=drive_link",
     responsibilities: [
-      "Led the development of Docker's web applications, focusing on scalability.",
-      "Worked with backend engineers to integrate APIs seamlessly with the frontend.",
-      "Contributed to open-source projects that were used with the Docker ecosystem.",
-    ],
-  },
-  {
-    review: "Adrian’s work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
-    imgPath: "/images/exp3.png",
-    logoPath: "/images/logo3.png",
-    title: "React Native Developer",
-    date: "March 2019 - May 2020",
-    responsibilities: [
-      "Built cross-platform mobile apps using React Native, integrating with Appwrite's backend services.",
-      "Improved app performance and user experience through code optimization and testing.",
-      "Coordinated with the product team to implement features based on feedback.",
+      "Developed a cross-platform app in React Native and Expo to connect volunteers and seekers for community services",
+      "Created an event system with automated volunteer enrollment, streamlining event approval and management",
+      "Implemented Swarozgar marketplace, empowering small businesses through streamlined shop registration and approvals",
     ],
   },
 ];
@@ -193,73 +189,117 @@ const expLogos = [
     name: "logo2",
     imgPath: "/images/logo2.png",
   },
+];
+
+const projects = [
   {
-    name: "logo3",
-    imgPath: "/images/logo3.png",
+    title: "LLM based Policy Assessment Chatbot",
+    tech: "Python, Django, Langchain, Llama 3, Google GoEmotions",
+    github: "https://github.com/tonythomasndm/LLM-based-Policy-Assessment-Chatbot",
+    description: "Developed a chatbot using Langchain and Llama 3 to assess the impact of government policies on vulnerable populations",
+    features: [
+      "Django-based GPT-like chat interface with ensembling (Similarity + BM25) for retrieval",
+      "Scraped policy details from government sites with BeautifulSoup",
+      "Multiclass sentiment analysis with GoEmotions and ranked reviews using TF-IDF",
+    ],
+    imgPath: "/images/project1.png",
+  },
+  {
+    title: "NewsXtreme",
+    tech: "Kotlin, Jetpack Compose, Jsoup, Room Database, Retrofit, APIs",
+    github: "https://github.com/tonythomasndm/NewsXtreme.git",
+    description: "Location-based news app using Jetpack Compose with MVVM pattern",
+    features: [
+      "Room database for offline reading",
+      "Jsoup for web scraping",
+      "Location services for local news",
+    ],
+    imgPath: "/images/project2.png",
+  },
+  {
+    title: "Weather Monitoring and Drought Assessment for Farmers",
+    tech: "Python, MySQL, Spark, Hadoop",
+    github: "https://github.com/tonythomasndm/Weather-Monitoring-and-Drought-Assessment-for-Farmers",
+    description: "Data warehousing system integrating weather, crop, rainfall, and drought data",
+    features: [
+      "Real-time insights with daily updates",
+      "Tailored crop recommendations using OLAP queries",
+      "Historical and seasonal data analysis",
+    ],
+    imgPath: "/images/project3.png",
+  },
+  {
+    title: "CyFuse Club College Website",
+    tech: "React.js, Vanilla CSS, JavaScript",
+    website: "https://cyfuse.iiitd.edu.in/",
+    description: "Fully functional college club website to release updates and newsletters",
+    features: [
+      "React.js with Material UI for seamless user interface",
+      "User-centric and UX driven design principles",
+    ],
+    imgPath: "/images/project1.png",
+  },
+  {
+    title: "Anveshan Hackathon Website",
+    tech: "React.js, JavaScript, Redux.js, Tailwind",
+    github: "https://github.com/tonythomasndm/Anveshan3.0-2024-IIITD-Website",
+    description: "Dynamic hackathon registration platform with Google Spreadsheets integration",
+    features: [
+      "Time-based problem statement releases",
+      "Page routing and navigation for interactive experience",
+    ],
+    imgPath: "/images/project2.png",
   },
 ];
 
-const testimonials = [
+const education = [
   {
-    name: "Esther Howard",
-    mentions: "@estherhoward",
-    review:
-      "I can’t say enough good things about Adrian. He was able to take our complex project requirements and turn them into a seamless, functional website. His problem-solving abilities are outstanding.",
-    imgPath: "/images/client1.png",
+    institution: "Indraprastha Institute of Information Technology, Delhi",
+    degree: "B.Tech in Computer Science and Design",
+    period: "2021-2025",
+    grade: "CGPA: 8.18",
   },
   {
-    name: "Wade Warren",
-    mentions: "@wadewarren",
-    review:
-      "Working with Adrian was a fantastic experience. He transformed our outdated website into a modern, user-friendly platform. His attention to detail and commitment to quality are unmatched. Highly recommend him for any web dev projects.",
-    imgPath: "/images/client3.png",
+    institution: "Vivekanand School, Anand Vihar, Delhi",
+    degree: "Grade XII CBSE Board",
+    period: "2021",
+    grade: "Percentage: 96.4%",
   },
   {
-    name: "Guy Hawkins",
-    mentions: "@guyhawkins",
-    review:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    imgPath: "/images/client2.png",
-  },
-  {
-    name: "Marvin McKinney",
-    mentions: "@marvinmckinney",
-    review:
-      "Adrian was a pleasure to work with. He turned our outdated website into a fresh, intuitive platform that’s both modern and easy to navigate. Fantastic work overall.",
-    imgPath: "/images/client5.png",
-  },
-  {
-    name: "Floyd Miles",
-    mentions: "@floydmiles",
-    review:
-      "Adrian’s expertise in web development is truly impressive. He delivered a robust and scalable solution for our e-commerce site, and our online sales have significantly increased since the launch. He’s a true professional!",
-    imgPath: "/images/client4.png",
-  },
-  {
-    name: "Albert Flores",
-    mentions: "@albertflores",
-    review:
-      "Adrian was a pleasure to work with. He understood our requirements perfectly and delivered a website that exceeded our expectations. His skills in both frontend and backend dev are top-notch.",
-    imgPath: "/images/client6.png",
+    institution: "St Mary's Convent School, Shastri Nagar, Ghaziabad",
+    degree: "Grade X ICSE Board",
+    period: "2019",
+    grade: "Percentage: 94.4%",
   },
 ];
 
-const socialImgs = [
+const leadership = [
+  "Lead Organizer of various college events like RIISE, Esummit'23, Epoch'24 hackathon and Anveshan hackathon",
+  "Coordinated the design and events team at Fresources, CyFuse Club, and IEEE-IIITD branch",
+  "Led educational workshops and volunteered for more than 100 underprivileged children at Vikiran Delhi",
+];
+
+const awards = [
+  "Competitive Programming: 200+ Leetcode solves, 200+ GeeksForGeeks solves, and Pupil rating on Codeforces",
+  "Awarded Best Teaching Assistant in Human-Centered Design Course under Professor Rajiv Ratn Shah",
+  "Received Honorarium Award for conducting Prototyping with Figma Session in Design Summer School'24 at IIITD",
+];
+
+const socialLinks = [
   {
-    name: "insta",
-    imgPath: "/images/insta.png",
-  },
-  {
-    name: "fb",
-    imgPath: "/images/fb.png",
-  },
-  {
-    name: "x",
-    imgPath: "/images/x.png",
+    name: "github",
+    imgPath: "/images/logos/git.svg",
+    url: "https://github.com/tonythomasndm",
   },
   {
     name: "linkedin",
     imgPath: "/images/linkedin.png",
+    url: "https://www.linkedin.com/in/tonythomasndm/",
+  },
+  {
+    name: "email",
+    imgPath: "/images/chat.png",
+    url: "mailto:tony21360@iiitd.ac.in",
   },
 ];
 
@@ -270,8 +310,11 @@ export {
   counterItems,
   expCards,
   expLogos,
-  testimonials,
-  socialImgs,
+  projects,
+  education,
+  leadership,
+  awards,
+  socialLinks,
   techStackIcons,
   techStackImgs,
   navLinks,
