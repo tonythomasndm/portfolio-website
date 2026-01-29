@@ -56,7 +56,7 @@ const Experience = () => {
   return (
     <section id="experience" ref={sectionRef} className="section-padding min-h-screen relative">
       <div className="max-w-6xl mx-auto">
-        <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold mb-16 text-center">
+        <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold mb-16 text-center text-[var(--gh-text)]">
           Work Experience
         </h2>
         <div className="relative">
@@ -73,24 +73,24 @@ const Experience = () => {
                 <div className="timeline-logo absolute xl:left-[-35.5vw] md:left-[-60px] left-[-40px]">
                   <img src={exp.logoPath} alt={exp.company} className="w-full h-full object-contain p-2" />
                 </div>
-                <div className="card-border rounded-xl p-6 md:p-8 hover:shadow-xl transition-all duration-300">
+                <div className="card-border p-6 md:p-8 hover:border-[var(--gh-accent)]/40 transition-colors duration-300">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                     <div>
-                      <h3 className="text-2xl md:text-3xl font-bold mb-2">{exp.title}</h3>
-                      <p className="text-lg text-gray-600 mb-1">
-                        <a href={exp.certificate} target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 transition-colors">
+                      <h3 className="text-2xl md:text-3xl font-bold mb-2 text-[var(--gh-text)]">{exp.title}</h3>
+                      <p className="text-lg text-[var(--gh-text-muted)] mb-1">
+                        <a href={exp.certificate} target="_blank" rel="noopener noreferrer" className="text-[var(--gh-accent)] hover:underline transition-colors">
                           {exp.company}
                         </a>
                       </p>
-                      <p className="text-sm text-gray-500">{exp.location}</p>
+                      <p className="text-sm text-[var(--gh-text-muted)]">{exp.location}</p>
                     </div>
-                    <p className="text-sm md:text-base text-gray-600 mt-2 md:mt-0">{exp.date}</p>
+                    <p className="text-sm md:text-base text-[var(--gh-text-muted)] mt-2 md:mt-0">{exp.date}</p>
                   </div>
                   <ul className="space-y-3 mt-6">
                     {exp.responsibilities.map((resp, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <span className="text-purple-600 mt-1">▸</span>
-                        <span className="text-gray-700">{resp}</span>
+                        <span className="text-[var(--gh-accent)] mt-1">▸</span>
+                        <span className="text-[var(--gh-text)]">{resp}</span>
                       </li>
                     ))}
                   </ul>

@@ -1,43 +1,29 @@
-import { useEffect, useRef, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Environment, Preload } from "@react-three/drei";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { words, counterItems } from "../assets/assets/constants";
-
-const ComputerModel = () => {
-  const { scene } = useGLTF("/models/computer-optimized-transformed.glb");
-  return <primitive object={scene} scale={2} position={[0, -1, 0]} />;
-};
+import { words, counterItems, socialLinks } from "../assets/assets/constants";
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const counterRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const socialRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (heroRef.current && textRef.current) {
-      const heroText = textRef.current.querySelector('.hero-text');
+      const heroText = textRef.current.querySelector(".hero-text");
       if (heroText) {
         const elements = [
-          heroText.querySelector('h1'),
-          heroText.querySelector('.flex.items-center'),
-          heroText.querySelector('p'),
-          heroText.querySelector('.flex.flex-wrap'),
+          heroText.querySelector("h1"),
+          heroText.querySelector(".flex.items-center"),
+          heroText.querySelector("p"),
+          heroText.querySelector(".hero-badges"),
+          socialRef.current,
         ].filter(Boolean) as HTMLElement[];
 
         gsap.fromTo(
           elements,
-          {
-            opacity: 0,
-            y: 50,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out",
-          }
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: "power3.out" }
         );
       }
 
@@ -48,8 +34,8 @@ const Hero = () => {
           const obj = { count: 0 };
           gsap.to(obj, {
             count: value,
-            duration: 2,
-            delay: 1.5 + index * 0.2,
+            duration: 1.8,
+            delay: 0.8 + index * 0.12,
             ease: "power2.out",
             onUpdate: () => {
               if (ref) {
@@ -62,74 +48,73 @@ const Hero = () => {
     }
   }, []);
 
+  const githubLink = socialLinks.find((s) => s.name === "github");
+  const linkedinLink = socialLinks.find((s) => s.name === "linkedin");
+
   return (
     <section id="hero" className="relative overflow-hidden min-h-screen flex items-center">
       <div className="hero-layout w-full padding-x-lg">
-        <div ref={heroRef} className="flex flex-col xl:flex-row items-center justify-between w-full gap-10">
-          <div ref={textRef} className="flex flex-col gap-6 xl:w-1/2">
+        <div ref={heroRef} className="flex flex-col items-center xl:items-start w-full max-w-4xl mx-auto xl:mx-0">
+          <div ref={textRef} className="flex flex-col gap-5 xl:gap-6 text-center xl:text-left">
             <div className="hero-text">
-              <h1 className="text-4xl md:text-6xl xl:text-7xl font-bold mb-4">
-                Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Tony Thomas</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold mb-3 xl:mb-4 tracking-tight">
+                Hi, I'm <span className="text-[var(--gh-accent)]">Tony Thomas</span>
               </h1>
-              <div className="flex items-center gap-3 text-2xl md:text-4xl xl:text-5xl font-semibold">
+              <div className="flex items-center justify-center xl:justify-start gap-2 sm:gap-3 text-xl sm:text-2xl md:text-3xl xl:text-4xl font-semibold text-[var(--gh-text)]">
                 <span>I'm a</span>
-                <div className="slide relative h-12 md:h-16 xl:h-20 overflow-hidden">
+                <div className="slide relative h-10 sm:h-12 md:h-14 xl:h-16 overflow-hidden">
                   <div className="wrapper">
                     {words.map((word, index) => (
                       <div key={index} className="flex items-center gap-2">
                         <span>{word.text}</span>
-                        {word.imgPath && <img src={word.imgPath} alt={word.text} />}
+                        {word.imgPath && <img src={word.imgPath} alt={word.text} className="size-6 sm:size-8 opacity-80" />}
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
-              <p className="text-lg md:text-xl text-gray-600 mt-6 max-w-2xl">
-                Computer Science and Design student at IIIT Delhi. Passionate about building innovative solutions 
-                that combine technology and creativity.
+              <p className="text-base sm:text-lg md:text-xl text-[var(--gh-text-muted)] mt-4 xl:mt-6 max-w-2xl mx-auto xl:mx-0 leading-relaxed">
+                B.Tech in Computer Science and Design at IIIT Delhi. Building solutions that combine technology and design.
               </p>
-              <div className="flex flex-wrap gap-4 mt-8">
+              <div className="hero-badges flex flex-wrap justify-center xl:justify-start gap-3 sm:gap-4 mt-6 xl:mt-8">
                 {counterItems.map((item, index) => (
-                  <div
-                    key={index}
-                    className="hero-badge"
-                  >
+                  <div key={index} className="hero-badge">
                     <div
                       ref={(el) => { counterRefs.current[index] = el; }}
-                      className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600"
+                      className="text-lg sm:text-xl md:text-2xl font-bold text-[var(--gh-accent)] tabular-nums"
                     >
                       {item.value}
                       {item.suffix}
                     </div>
-                    <div className="text-xs md:text-sm text-gray-600">{item.label}</div>
+                    <div className="text-xs sm:text-sm text-[var(--gh-text-muted)]">{item.label}</div>
                   </div>
                 ))}
               </div>
+              <div ref={socialRef} className="flex flex-wrap justify-center xl:justify-start items-center gap-3 mt-6 xl:mt-8">
+                {githubLink && (
+                  <a
+                    href={githubLink.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-lg border border-[var(--gh-border)] text-[var(--gh-text-muted)] hover:text-[var(--gh-accent)] hover:border-[var(--gh-accent)]/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--gh-accent)]/50"
+                    aria-label="GitHub"
+                  >
+                    <img src={githubLink.imgPath} alt="GitHub" className="size-5 sm:size-6" />
+                  </a>
+                )}
+                {linkedinLink && (
+                  <a
+                    href={linkedinLink.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-lg border border-[var(--gh-border)] text-[var(--gh-text-muted)] hover:text-[var(--gh-accent)] hover:border-[var(--gh-accent)]/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--gh-accent)]/50"
+                    aria-label="LinkedIn"
+                  >
+                    <img src={linkedinLink.imgPath} alt="LinkedIn" className="size-5 sm:size-6" />
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="hero-3d-layout">
-            <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-gray-400">Loading 3D Model...</div>}>
-              <Canvas 
-                camera={{ position: [0, 0, 5], fov: 50 }}
-                gl={{ antialias: true, alpha: true }}
-                dpr={[1, 2]}
-              >
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[10, 10, 5]} intensity={1} />
-                <pointLight position={[-10, -10, -5]} intensity={0.5} />
-                <ComputerModel />
-                <OrbitControls 
-                  enableZoom={false} 
-                  autoRotate 
-                  autoRotateSpeed={2}
-                  enablePan={false}
-                  enableDamping
-                  dampingFactor={0.05}
-                />
-                <Environment preset="sunset" />
-                <Preload all />
-              </Canvas>
-            </Suspense>
           </div>
         </div>
       </div>

@@ -56,12 +56,12 @@ const About = () => {
   return (
     <section id="about" ref={sectionRef} className="section-padding min-h-screen">
       <div className="max-w-6xl mx-auto">
-        <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold mb-12 text-center">
+        <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold mb-12 text-center text-[var(--gh-text)]">
           About Me
         </h2>
         <div className="space-y-8">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+            <p className="text-lg md:text-xl text-[var(--gh-text-muted)] leading-relaxed">
               I'm a Computer Science and Design student at IIIT Delhi with a passion for creating 
               innovative solutions that bridge technology and user experience. With expertise in full-stack 
               development, machine learning, and mobile app development, I love building projects that make 
@@ -69,18 +69,18 @@ const About = () => {
             </p>
           </div>
           <div>
-            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center">Education</h3>
+            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center text-[var(--gh-text)]">Education</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {education.map((edu, index) => (
                 <div
                   key={index}
                   ref={(el) => { cardsRef.current[index] = el; }}
-                  className="card-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300"
+                  className="card-border p-6 hover:border-[var(--gh-accent)]/40 transition-colors duration-300"
                 >
-                  <h4 className="text-xl font-semibold mb-2">{edu.institution}</h4>
-                  <p className="text-gray-600 mb-2">{edu.degree}</p>
-                  <p className="text-sm text-gray-500 mb-2">{edu.period}</p>
-                  <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                  <h4 className="text-xl font-semibold mb-2 text-[var(--gh-text)]">{edu.institution}</h4>
+                  <p className="text-[var(--gh-text-muted)] mb-2">{edu.degree}</p>
+                  <p className="text-sm text-[var(--gh-text-muted)] mb-2">{edu.period}</p>
+                  <p className="text-lg font-bold text-[var(--gh-accent)]">
                     {edu.grade}
                   </p>
                 </div>

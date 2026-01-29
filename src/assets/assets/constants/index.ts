@@ -75,6 +75,9 @@ export interface SocialLink {
   url: string;
 }
 
+/** Resume PDF in public folder (encoded for URL safety) */
+export const resumeUrl = "/Tony%20Thomas%20Resume.pdf";
+
 export const navLinks: NavLink[] = [
   {
     name: "About",
