@@ -1,65 +1,69 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { socialLinks } from "../assets/assets/constants";
+import { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { socialLinks, formspreeEndpoint, resumeUrl } from "../assets/assets/constants";
 
-gsap.registerPlugin(ScrollTrigger);
+const titleVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
+};
 
 const Contact = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
-  const infoRef = useRef<HTMLDivElement>(null);
-  const socialsRef = useRef<HTMLDivElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    if (sectionRef.current && titleRef.current) {
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-        }
-      );
-      if (formRef.current) {
-        gsap.fromTo(
-          formRef.current,
-          { opacity: 0, x: -40 },
-          { opacity: 1, x: 0, duration: 0.7, delay: 0.2, scrollTrigger: { trigger: formRef.current, start: "top 85%" } }
-        );
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = formRef.current;
+    if (!form) return;
+
+    const formData = new FormData(form);
+    const name = (formData.get("name") as string) || "Someone";
+    formData.set("_subject", `Portfolio Contact from ${name}`);
+
+    setStatus("sending");
+
+    try {
+      const res = await fetch(formspreeEndpoint, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
       }
-      if (infoRef.current) {
-        gsap.fromTo(
-          infoRef.current,
-          { opacity: 0, x: 40 },
-          { opacity: 1, x: 0, duration: 0.7, delay: 0.3, scrollTrigger: { trigger: infoRef.current, start: "top 85%" } }
-        );
-      }
-      if (socialsRef.current) {
-        gsap.fromTo(
-          socialsRef.current.children,
-          { opacity: 0, scale: 0.8 },
-          { opacity: 1, scale: 1, duration: 0.4, stagger: 0.08, delay: 0.4, scrollTrigger: { trigger: socialsRef.current, start: "top 85%" } }
-        );
-      }
+    } catch {
+      setStatus("error");
     }
-  }, []);
+  };
 
   return (
-    <section id="contact" ref={sectionRef} className="section-padding min-h-screen">
-      <div className="max-w-5xl mx-auto">
-        <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold mb-4 text-center text-[var(--gh-text)]">
-          Contact Me
-        </h2>
-        <p className="text-center text-[var(--gh-text-muted)] mb-16 max-w-2xl mx-auto">
-          Have a project in mind or want to connect? Drop a message or reach out via the links below.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div ref={formRef}>
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+    <section id="contact" className="section-padding">
+      <div className="content-max">
+        <motion.h2
+          className="section-title"
+          variants={titleVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          Contact
+        </motion.h2>
+        <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 min-w-0">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6 }}
+          >
+            <form ref={formRef} className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Your name" required />
@@ -70,52 +74,76 @@ const Contact = () => {
               </div>
               <div>
                 <label htmlFor="message">Message</label>
-                <textarea id="message" name="message" rows={5} placeholder="Your message" required />
+                <textarea id="message" name="message" rows={4} placeholder="Your message" required />
               </div>
-              <a
-                href="mailto:tony21360@iiitd.ac.in?subject=Portfolio%20Contact"
-                className="inline-flex justify-center items-center w-full py-3 rounded-lg bg-[var(--gh-accent)] text-[var(--gh-bg)] font-medium hover:bg-[var(--gh-accent-hover)] transition-colors"
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="block w-full py-3 text-center font-medium text-[var(--gh-bg)] bg-[var(--gh-accent)] rounded-lg hover:bg-[var(--gh-accent-hover)] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Send Message
-              </a>
+                {status === "sending" ? "Sending..." : status === "success" ? "Sent!" : "Send Message"}
+              </button>
+              {status === "success" && (
+                <p className="text-sm text-green-400">Thanks! I&apos;ll get back to you soon.</p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-red-400">
+                  Something went wrong. Please email me directly at ttonythomasndm@gmail.com
+                </p>
+              )}
             </form>
-          </div>
-          <div ref={infoRef} className="flex flex-col justify-center space-y-6">
-            <div className="card-border p-6">
-              <h3 className="text-xl font-semibold mb-4 text-[var(--gh-text)]">Get in touch</h3>
-              <div className="space-y-4">
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-[var(--gh-text-muted)] mb-1">Email</p>
-                  <a href="mailto:tony21360@iiitd.ac.in" className="text-[var(--gh-accent)] hover:underline">
-                    tony21360@iiitd.ac.in
-                  </a>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-[var(--gh-text-muted)] mb-1">Phone</p>
-                  <a href="tel:+919625718420" className="text-[var(--gh-accent)] hover:underline">
-                    +91 9625718420
-                  </a>
-                </div>
+          </motion.div>
+          <motion.div
+            className="card-border p-5 sm:p-6 min-w-0"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6 }}
+            whileHover={{ y: -4, transition: { duration: 0.2 } }}
+          >
+            <h3 className="font-semibold text-[var(--gh-text)] mb-4">Get in touch</h3>
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs text-[var(--gh-text-muted)] uppercase tracking-wider mb-1">Email</p>
+                <a href="mailto:ttonythomasndm@gmail.com" className="text-[var(--gh-accent)] hover:underline text-sm">
+                  ttonythomasndm@gmail.com
+                </a>
+              </div>
+              <div>
+                <p className="text-xs text-[var(--gh-text-muted)] uppercase tracking-wider mb-1">Phone</p>
+                <a href="tel:9625718420" className="text-[var(--gh-accent)] hover:underline text-sm">
+                  +91 9625718420
+                </a>
+              </div>
+              <div>
+                <p className="text-xs text-[var(--gh-text-muted)] uppercase tracking-wider mb-1">Resume</p>
+                <a
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-[var(--gh-accent)] border border-[var(--gh-accent)]/50 rounded-lg hover:bg-[var(--gh-accent)]/10 hover:border-[var(--gh-accent)] transition-colors"
+                >
+                  View Resume →
+                </a>
               </div>
             </div>
-            <div>
-              <p className="text-sm text-[var(--gh-text-muted)] mb-3">Connect with me</p>
-              <div ref={socialsRef} className="flex flex-wrap gap-3">
-                {socialLinks.map((social, index) => (
+            <div className="mt-6 pt-4 border-t border-[var(--gh-border)]">
+              <p className="text-xs text-[var(--gh-text-muted)] mb-2">Connect</p>
+              <div className="flex gap-2">
+                {socialLinks.map((s, i) => (
                   <a
-                    key={index}
-                    href={social.url}
-                    target={social.name === "email" ? undefined : "_blank"}
-                    rel={social.name === "email" ? undefined : "noopener noreferrer"}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--gh-border)] text-[var(--gh-text-muted)] hover:text-[var(--gh-accent)] hover:border-[var(--gh-accent)]/50 transition-all"
+                    key={i}
+                    href={s.url}
+                    target={s.name === "email" ? undefined : "_blank"}
+                    rel={s.name === "email" ? undefined : "noopener noreferrer"}
+                    className="p-2 rounded-lg border border-[var(--gh-border)] hover:border-[var(--gh-accent)]/50 hover:text-[var(--gh-accent)] transition-colors"
                   >
-                    <img src={social.imgPath} alt={social.name} className="size-5" />
-                    <span className="capitalize">{social.name}</span>
+                    <img src={s.imgPath} alt={s.name} className="size-5" />
                   </a>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

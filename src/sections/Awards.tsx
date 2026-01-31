@@ -1,19 +1,18 @@
 import { motion } from "framer-motion";
-import { leadership } from "../assets/assets/constants";
+import { awards } from "../assets/assets/constants";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
   },
 };
 
 const itemVariants = (i: number) => ({
-  hidden: { opacity: 0, y: 20, x: i % 2 === 0 ? 24 : -24 },
+  hidden: { opacity: 0, x: i % 2 === 0 ? -36 : 36 },
   visible: {
     opacity: 1,
-    y: 0,
     x: 0,
     transition: { duration: 0.5,  },
   },
@@ -28,8 +27,8 @@ const titleVariants = {
   },
 };
 
-const Leadership = () => (
-  <section id="leadership" className="section-padding">
+const Awards = () => (
+  <section id="awards" className="section-padding">
     <div className="content-max">
       <motion.h2
         className="section-title"
@@ -38,7 +37,7 @@ const Leadership = () => (
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        Leadership & Community
+        Awards
       </motion.h2>
       <motion.div
         className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 min-w-0"
@@ -47,15 +46,16 @@ const Leadership = () => (
         whileInView="visible"
         viewport={{ once: true, margin: "-60px" }}
       >
-        {leadership.map((item, i) => (
+        {awards.map((a, i) => (
           <motion.div
             key={i}
             variants={itemVariants(i)}
-            className="card-border p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 min-w-0"
+            className="card-border p-4 sm:p-5 min-w-0"
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
           >
-            <p className="text-[var(--gh-text)] text-sm font-medium">{item.role}</p>
-            <p className="text-xs text-[var(--gh-text-muted)] shrink-0">{item.period}</p>
+            <h3 className="font-semibold text-[var(--gh-text)]">{a.title}</h3>
+            <p className="text-sm text-[var(--gh-text-muted)] mt-1">{a.desc}</p>
+            <p className="text-xs text-[var(--gh-accent)] mt-2">{a.date}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -63,4 +63,4 @@ const Leadership = () => (
   </section>
 );
 
-export default Leadership;
+export default Awards;

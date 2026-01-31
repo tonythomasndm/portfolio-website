@@ -1,103 +1,88 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 import { expCards } from "../assets/assets/constants";
 
-gsap.registerPlugin(ScrollTrigger);
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: (i: number) => ({
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: i * 0.05 },
+  }),
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -24, y: 16 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
+const titleVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
+};
 
 const Experience = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    if (sectionRef.current && titleRef.current) {
-      gsap.fromTo(
-        titleRef.current,
-        {
-          opacity: 0,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          },
-        }
-      );
-
-      cardsRef.current.forEach((card, index) => {
-        if (card) {
-          gsap.fromTo(
-            card,
-            {
-              opacity: 0,
-              y: 100,
-            },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              delay: index * 0.3,
-              scrollTrigger: {
-                trigger: card,
-                start: "top 85%",
-              },
-            }
-          );
-        }
-      });
-    }
-  }, []);
 
   return (
-    <section id="experience" ref={sectionRef} className="section-padding min-h-screen relative">
-      <div className="max-w-6xl mx-auto">
-        <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold mb-16 text-center text-[var(--gh-text)]">
-          Work Experience
-        </h2>
-        <div className="relative">
+    <section id="experience" ref={sectionRef} className="section-padding">
+      <div className="content-max">
+        <motion.h2
+          className="section-title"
+          variants={titleVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          Experience
+        </motion.h2>
+        <div className="relative pl-10 sm:pl-12 md:pl-14">
           <div className="timeline-wrapper">
-            <div className="timeline"></div>
+            <div className="timeline" />
           </div>
-          <div className="space-y-12 pl-8 md:pl-20 xl:pl-40">
-            {expCards.map((exp, index) => (
-              <div
-                key={index}
-                ref={(el) => { cardsRef.current[index] = el; }}
-                className="exp-card-wrapper relative"
-              >
-                <div className="timeline-logo absolute xl:left-[-35.5vw] md:left-[-60px] left-[-40px]">
-                  <img src={exp.logoPath} alt={exp.company} className="w-full h-full object-contain p-2" />
+          <motion.div
+            className="space-y-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            {expCards.map((exp, i) => (
+              <motion.div key={i} variants={itemVariants} className="relative">
+                <div className="timeline-logo">
+                  <img src={exp.logoPath} alt="" />
                 </div>
-                <div className="card-border p-6 md:p-8 hover:border-[var(--gh-accent)]/40 transition-colors duration-300">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                <motion.div
+                  className="card-border p-4 sm:p-5 md:p-6"
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
                     <div>
-                      <h3 className="text-2xl md:text-3xl font-bold mb-2 text-[var(--gh-text)]">{exp.title}</h3>
-                      <p className="text-lg text-[var(--gh-text-muted)] mb-1">
-                        <a href={exp.certificate} target="_blank" rel="noopener noreferrer" className="text-[var(--gh-accent)] hover:underline transition-colors">
-                          {exp.company}
-                        </a>
-                      </p>
-                      <p className="text-sm text-[var(--gh-text-muted)]">{exp.location}</p>
+                      <h3 className="text-lg md:text-xl font-semibold text-[var(--gh-text)]">{exp.title}</h3>
+                      <p className="text-[var(--gh-text-muted)] text-sm">{exp.company} · {exp.location}</p>
                     </div>
-                    <p className="text-sm md:text-base text-[var(--gh-text-muted)] mt-2 md:mt-0">{exp.date}</p>
+                    <p className="text-sm text-[var(--gh-text-muted)] shrink-0">{exp.date}</p>
                   </div>
-                  <ul className="space-y-3 mt-6">
-                    {exp.responsibilities.map((resp, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <span className="text-[var(--gh-accent)] mt-1">▸</span>
-                        <span className="text-[var(--gh-text)]">{resp}</span>
+                  <ul className="space-y-2">
+                    {exp.responsibilities.map((r, j) => (
+                      <li key={j} className="flex gap-2 text-sm text-[var(--gh-text)]">
+                        <span className="text-[var(--gh-accent)] mt-0.5 flex-shrink-0">▸</span>
+                        <span>{r}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

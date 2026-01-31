@@ -1,96 +1,56 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import { education } from "../assets/assets/constants";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const About = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    if (sectionRef.current && titleRef.current) {
-      gsap.fromTo(
-        titleRef.current,
-        {
-          opacity: 0,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          },
-        }
-      );
-
-      cardsRef.current.forEach((card, index) => {
-        if (card) {
-          gsap.fromTo(
-            card,
-            {
-              opacity: 0,
-              x: index % 2 === 0 ? -50 : 50,
-            },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.8,
-              delay: index * 0.2,
-              scrollTrigger: {
-                trigger: card,
-                start: "top 85%",
-              },
-            }
-          );
-        }
-      });
-    }
-  }, []);
-
-  return (
-    <section id="about" ref={sectionRef} className="section-padding min-h-screen">
-      <div className="max-w-6xl mx-auto">
-        <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold mb-12 text-center text-[var(--gh-text)]">
-          About Me
-        </h2>
-        <div className="space-y-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-lg md:text-xl text-[var(--gh-text-muted)] leading-relaxed">
-              I'm a Computer Science and Design student at IIIT Delhi with a passion for creating 
-              innovative solutions that bridge technology and user experience. With expertise in full-stack 
-              development, machine learning, and mobile app development, I love building projects that make 
-              a real impact.
-            </p>
-          </div>
-          <div>
-            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center text-[var(--gh-text)]">Education</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {education.map((edu, index) => (
-                <div
-                  key={index}
-                  ref={(el) => { cardsRef.current[index] = el; }}
-                  className="card-border p-6 hover:border-[var(--gh-accent)]/40 transition-colors duration-300"
-                >
-                  <h4 className="text-xl font-semibold mb-2 text-[var(--gh-text)]">{edu.institution}</h4>
-                  <p className="text-[var(--gh-text-muted)] mb-2">{edu.degree}</p>
-                  <p className="text-sm text-[var(--gh-text-muted)] mb-2">{edu.period}</p>
-                  <p className="text-lg font-bold text-[var(--gh-accent)]">
-                    {edu.grade}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+const titleVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
 };
+
+const About = () => (
+  <section id="about" className="section-padding">
+    <div className="content-max">
+      <motion.h2
+        className="section-title"
+        variants={titleVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+      >
+        About
+      </motion.h2>
+      <motion.p
+        className="text-[var(--gh-text-muted)] text-center max-w-2xl mx-auto mb-10 leading-relaxed"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        Associate Software Engineer at National Australia Bank. B.Tech in Computer Science and Design from IIIT Delhi.
+        I build scalable systems with Spring Boot, React, and modern cloud tools—focusing on clean architecture and user impact.
+      </motion.p>
+      <motion.div
+        className="card-border p-5 sm:p-6 max-w-md mx-auto"
+        initial={{ opacity: 0, y: 24, scale: 0.98 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.6, delay: 0.15 }}
+        whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      >
+        <h3 className="text-sm font-semibold text-[var(--gh-accent)] mb-2">Education</h3>
+        {education.map((edu, i) => (
+          <div key={i}>
+            <p className="font-medium text-[var(--gh-text)]">{edu.institution}</p>
+            <p className="text-sm text-[var(--gh-text-muted)]">{edu.degree}</p>
+            <p className="text-sm text-[var(--gh-text-muted)]">{edu.period} · {edu.grade}</p>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  </section>
+);
 
 export default About;
