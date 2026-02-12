@@ -58,8 +58,8 @@ export interface LeadershipItem {
   period: string;
 }
 
-/** Google Drive resume link - update the file ID if you replace your resume */
-export const resumeUrl = "https://drive.google.com/file/d/1_WWPTKI1_01tbjTwIaIsYyYyLqqQ17Cy/view?usp=sharing";
+/** Local resume PDF file */
+export const resumeUrl = "/One_page_resume.pdf";
 
 /** Replace with your Formspree form ID from https://formspree.io */
 export const formspreeEndpoint = "https://formspree.io/f/xbdyvlrj";
@@ -136,7 +136,8 @@ export const projects: Project[] = [
     title: "E-Commerce Microservices Platform",
     tech: "Java, Spring Boot, PostgreSQL, Flyway, JWT, Docker, JUnit",
     github: "https://github.com/tonythomasndm/spring-boot-ecom-store.git",
-    description: "Secure RESTful microservices for product, cart, and order lifecycles with Stripe integration",
+    description:
+      "Secure RESTful microservices for product, cart, and order lifecycles with Stripe integration",
     features: [
       "Spring Boot and JWT for secure APIs; Stripe payment with webhook handling",
       "Docker containerization, CI/CD pipelines, 95% test coverage",
@@ -147,7 +148,8 @@ export const projects: Project[] = [
   {
     title: "Weather Monitoring and Drought Assessment for Farmers",
     tech: "Python, SQL, Apache Spark, TensorFlow",
-    github: "https://github.com/tonythomasndm/Weather-Monitoring-and-Drought-Assessment-for-Farmers.git",
+    github:
+      "https://github.com/tonythomasndm/Weather-Monitoring-and-Drought-Assessment-for-Farmers.git",
     description: "Scalable ETL and analytics for agricultural and weather data",
     features: [
       "ETL pipelines processing 3M+ records; Spark Streaming for real-time forecasts",
@@ -159,7 +161,8 @@ export const projects: Project[] = [
     title: "Smart News Mobile Application",
     tech: "Kotlin, Android, Jetpack Compose, Room DB, Retrofit",
     github: "https://github.com/tonythomasndm/NewsXtreme.git",
-    description: "Location-aware Android news app with offline-first architecture",
+    description:
+      "Location-aware Android news app with offline-first architecture",
     features: [
       "Location-aware news delivery—40% engagement increase",
       "Offline-first with Room and Retrofit—25% retention improvement",
@@ -223,15 +226,40 @@ export const skillsByCategory: { category: string; items: string[] }[] = [
   },
   {
     category: "Frontend",
-    items: ["React.js", "React Native", "Apollo GraphQL", "Redux", "Material UI", "TailwindCSS", "Jest", "AutoX"],
+    items: [
+      "React.js",
+      "React Native",
+      "Apollo GraphQL",
+      "Redux",
+      "Material UI",
+      "TailwindCSS",
+      "Jest",
+      "AutoX",
+    ],
   },
   {
     category: "Backend",
-    items: ["Spring Boot", "REST APIs", "GraphQL", "JWT", "Maven", "Gradle", "JUnit", "Mockito"],
+    items: [
+      "Spring Boot",
+      "REST APIs",
+      "GraphQL",
+      "JWT",
+      "Maven",
+      "Gradle",
+      "JUnit",
+      "Mockito",
+    ],
   },
   {
     category: "Databases & Messaging",
-    items: ["PostgreSQL", "MongoDB", "Redis", "Neo4J", "Apache Kafka", "Flyway"],
+    items: [
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "Neo4J",
+      "Apache Kafka",
+      "Flyway",
+    ],
   },
   {
     category: "Cloud & DevOps",
@@ -239,7 +267,15 @@ export const skillsByCategory: { category: string; items: string[] }[] = [
   },
   {
     category: "Tools",
-    items: ["Git", "GitHub", "IntelliJ IDEA", "VS Code", "Postman", "DBeaver", "Splunk"],
+    items: [
+      "Git",
+      "GitHub",
+      "IntelliJ IDEA",
+      "VS Code",
+      "Postman",
+      "DBeaver",
+      "Splunk",
+    ],
   },
 ];
 
@@ -257,14 +293,35 @@ export const awards: Award[] = [
 ];
 
 export const leadership: LeadershipItem[] = [
-  { role: "Volunteer, Vikiran — educating underprivileged students", period: "Aug 2024 — Present" },
-  { role: "Lead Organizer, Epoch 24 — ML/AI hackathon series across Delhi", period: "Jan 2024 — May 2024" },
-  { role: "Design Head, CyFuse Club, BioBytes Club, IEEE Club", period: "Oct 2023 — May 2024" },
+  {
+    role: "Volunteer, Vikiran — educating underprivileged students",
+    period: "Aug 2024 — Present",
+  },
+  {
+    role: "Lead Organizer, Epoch 24 — ML/AI hackathon series across Delhi",
+    period: "Jan 2024 — May 2024",
+  },
+  {
+    role: "Design Head, CyFuse Club, BioBytes Club, IEEE Club",
+    period: "Oct 2023 — May 2024",
+  },
   { role: "President, Fresources Club IIITD", period: "May 2022 — Present" },
 ];
 
 export const socialLinks: SocialLink[] = [
-  { name: "github", imgPath: "/images/logos/git.svg", url: "https://github.com/tonythomasndm" },
-  { name: "linkedin", imgPath: "/images/linkedin.png", url: "https://www.linkedin.com/in/tonythomasndm/" },
-  { name: "email", imgPath: "/images/chat.png", url: "mailto:ttonythomasndm@gmail.com" },
+  {
+    name: "github",
+    imgPath: "/images/logos/git.svg",
+    url: "https://github.com/tonythomasndm",
+  },
+  {
+    name: "linkedin",
+    imgPath: "/images/linkedin.png",
+    url: "https://www.linkedin.com/in/tonythomasndm/",
+  },
+  {
+    name: "email",
+    imgPath: "/images/chat.png",
+    url: "mailto:ttonythomasndm@gmail.com",
+  },
 ];
